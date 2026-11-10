@@ -7,13 +7,44 @@
 
 只改自己的畫面；對方、手機 App、通知預覽看到的都還是原文。Gmail 裡的 Chat 也能用。
 
+## 需求
+
+- Google Chrome，或其他支援 Manifest V3 的 Chromium 瀏覽器（Edge、Brave、Arc 等）
+
 ## 安裝
 
-1. Chrome 開 `chrome://extensions`，打開右上「開發人員模式」。
-2. 「載入未封裝項目」→ 選這個資料夾。
-3. 重新整理 Google Chat 或 Gmail 分頁。
+這個擴充功能沒有上架 Chrome Web Store，要用「載入未封裝項目」的方式安裝。
 
-改了程式之後：在 `chrome://extensions` 按這個擴充功能的重新載入 ⟳，再重新整理分頁。
+1. 下載這個 repo，二選一：
+   - 用 git：
+
+     ```sh
+     git clone https://github.com/104corp/google-chat-markdown-code.git
+     ```
+
+   - 不用 git：在 repo 頁面按綠色的 **Code** → **Download ZIP**，下載後解壓縮。
+2. Chrome 開 `chrome://extensions`。
+3. 打開右上角的 **開發人員模式**（Developer mode）。
+4. 按 **載入未封裝項目**（Load unpacked），選剛才下載的資料夾（裡面要直接看得到 `manifest.json`；解壓縮 ZIP 時常會多包一層，選裡面那層）。
+5. 重新整理已開啟的 Google Chat 或 Gmail 分頁。
+
+## 更新
+
+1. 取得新版：用 git 的在資料夾裡執行 `git pull`；用 ZIP 的重新下載並解壓縮到同一個位置（覆蓋舊檔）。
+2. 開 `chrome://extensions`，在 *Google Chat Markdown & Code* 卡片上按重新載入 ⟳。
+3. 重新整理已開啟的 Google Chat 或 Gmail 分頁。
+
+## 移除
+
+開 `chrome://extensions`，在 *Google Chat Markdown & Code* 卡片上按 **移除**。
+
+## 權限
+
+| 權限 | 用途 |
+|---|---|
+| 存取 `chat.google.com` | 只在 Google Chat（含 Gmail 裡的 Chat）注入樣式與程式 |
+
+不需要其他權限，不收集、不傳送任何資料，所有處理都在你的瀏覽器裡完成。
 
 ## Markdown
 
