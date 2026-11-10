@@ -19,7 +19,7 @@
    - 用 git：
 
      ```sh
-     git clone https://github.com/104corp/google-chat-markdown-code.git
+     git clone https://github.com/jackylabs/google-chat-markdown-code.git
      ```
 
    - 不用 git：在 repo 頁面按綠色的 **Code** → **Download ZIP**，下載後解壓縮。
