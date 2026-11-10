@@ -1,0 +1,23 @@
+{
+  "manifest_version": 3,
+  "name": "Google Chat Markdown & Code",
+  "description": "Google Chat 訊息的 markdown（表格、標題、引用、清單）顯示成格式化內容，程式碼依語言上色、保留字加粗；只改自己的畫面",
+  "version": "0.4.1",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://chat.google.com/*"
+      ],
+      "css": [
+        "chat-format.css"
+      ],
+      "js": [
+        "vendor/highlight.min.js",
+        "vendor/delphi.min.js",
+        "chat-format.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_idle"
+    }
+  ]
+}
