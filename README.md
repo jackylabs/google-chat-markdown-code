@@ -70,6 +70,11 @@
 | `chat-format.js` | 全部邏輯：markdown 解析與渲染、程式碼偵測與上色、診斷 |
 | `chat-format.css` | 表格、標題、引用、清單、程式碼的樣式與配色 |
 | `vendor/` | highlight.js 11.11.1 與 Delphi 語言檔（BSD-3-Clause，取自 cdnjs，已核對 SRI） |
+| `LICENSE` | MIT License |
+
+## 授權
+
+MIT License，見 `LICENSE`。`vendor/` 的 highlight.js 是 BSD-3-Clause，授權聲明在檔案開頭。
 
 ## 沒做的
 
