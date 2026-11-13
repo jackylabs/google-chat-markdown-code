@@ -1,112 +1,114 @@
 # Google Chat Markdown & Code
 
-讓 Google Chat 的訊息更好讀的 Chrome 擴充功能：
+**English** | [繁體中文](README.zh-TW.md)
 
-- **Markdown**：表格、標題、引用、清單、分隔線顯示成格式化內容。
-- **程式碼上色**：依語言上色、保留字加粗，類似 Notepad++。
+A Chrome extension that makes Google Chat messages easier to read:
 
-只改自己的畫面；對方、手機 App、通知預覽看到的都還是原文。Gmail 裡的 Chat 也能用。
+- **Markdown**: tables, headings, blockquotes, lists and horizontal rules are rendered as formatted content.
+- **Code highlighting**: code is colored by language with bold keywords, similar to Notepad++.
 
-## 需求
+It only changes your own view. Other people, the mobile app and notification previews still see the original text. It also works for Chat inside Gmail.
 
-- Google Chrome，或其他支援 Manifest V3 的 Chromium 瀏覽器（Edge、Brave、Arc 等）
+## Requirements
 
-## 安裝
+- Google Chrome, or another Chromium browser that supports Manifest V3 (Edge, Brave, Arc, etc.)
 
-這個擴充功能沒有上架 Chrome Web Store，要用「載入未封裝項目」的方式安裝。
+## Installation
 
-1. 下載這個 repo，二選一：
-   - 用 git：
+This extension is not on the Chrome Web Store. Install it with "Load unpacked".
+
+1. Download this repo in one of two ways:
+   - With git:
 
      ```sh
      git clone https://github.com/jackylabs/google-chat-markdown-code.git
      ```
 
-   - 不用 git：在 repo 頁面按綠色的 **Code** → **Download ZIP**，下載後解壓縮。
-2. Chrome 開 `chrome://extensions`。
-3. 打開右上角的 **開發人員模式**（Developer mode）。
-4. 按 **載入未封裝項目**（Load unpacked），選剛才下載的資料夾（裡面要直接看得到 `manifest.json`；解壓縮 ZIP 時常會多包一層，選裡面那層）。
-5. 重新整理已開啟的 Google Chat 或 Gmail 分頁。
+   - Without git: on the repo page, click the green **Code** button, then **Download ZIP**, and unzip it.
+2. Open `chrome://extensions` in Chrome.
+3. Turn on **Developer mode** in the top-right corner.
+4. Click **Load unpacked** and pick the folder you downloaded. `manifest.json` must be directly inside that folder. Unzipping often adds an extra folder level, so pick the inner one.
+5. Reload any open Google Chat or Gmail tabs.
 
-## 更新
+## Updating
 
-1. 取得新版：用 git 的在資料夾裡執行 `git pull`；用 ZIP 的重新下載並解壓縮到同一個位置（覆蓋舊檔）。
-2. 開 `chrome://extensions`，在 *Google Chat Markdown & Code* 卡片上按重新載入 ⟳。
-3. 重新整理已開啟的 Google Chat 或 Gmail 分頁。
+1. Get the new version. With git, run `git pull` in the folder. With ZIP, download again and unzip over the old files in the same place.
+2. Open `chrome://extensions` and click reload ⟳ on the *Google Chat Markdown & Code* card.
+3. Reload any open Google Chat or Gmail tabs.
 
-## 移除
+## Uninstalling
 
-開 `chrome://extensions`，在 *Google Chat Markdown & Code* 卡片上按 **移除**。
+Open `chrome://extensions` and click **Remove** on the *Google Chat Markdown & Code* card.
 
-## 權限
+## Permissions
 
-| 權限 | 用途 |
+| Permission | Purpose |
 |---|---|
-| 存取 `chat.google.com` | 只在 Google Chat（含 Gmail 裡的 Chat）注入樣式與程式 |
+| Access to `chat.google.com` | Injects styles and scripts only into Google Chat, including Chat inside Gmail |
 
-不需要其他權限，不收集、不傳送任何資料，所有處理都在你的瀏覽器裡完成。
+No other permissions are needed. It collects and sends no data. Everything runs in your browser.
 
 ## Markdown
 
-| 語法 | 寫法 |
+| Syntax | How to write it |
 |---|---|
-| 表格 | `\| 欄 \| 欄 \|`，第二行 `\|---\|--:\|`（`:` 控制對齊） |
-| 標題 | `#`～`######` |
-| 引用 | `>`（裡面可再放清單、表格） |
-| 清單 | `-`、`*`、`1.` |
-| 分隔線 | `---` |
-| 行內 | Chat 沒轉的 `**粗體**`、`[文字](網址)`；裸網址自動補連結 |
+| Table | `\| col \| col \|`, then a second line `\|---\|--:\|` (`:` sets alignment) |
+| Heading | `#` to `######` |
+| Blockquote | `>` (can contain lists and tables) |
+| List | `-`, `*`, `1.` |
+| Horizontal rule | `---` |
+| Inline | `**bold**` and `[text](url)` that Chat did not convert; bare URLs become links |
 
-- 只處理含 markdown 區塊的訊息；一般聊天訊息照 Chat 原樣顯示。
-- Chat 已轉好的粗體、斜體、刪除線、連結照原樣保留。
-- 段落保留換行，跟 Chat 一樣一行就是一行（不像 GitHub 會把相鄰行併成一段）。
-- 表格字體是訊息的 0.75 倍。
+- Only messages that contain markdown blocks are processed. Ordinary chat messages are shown as Chat renders them.
+- Bold, italic, strikethrough and links that Chat already formatted are kept as is.
+- Line breaks inside paragraphs are kept, so one line stays one line like in Chat. GitHub would merge adjacent lines into a paragraph.
+- Table text is 0.75 times the message font size.
 
-## 程式碼上色
+## Code highlighting
 
-**哪些會上色**
+**What gets highlighted**
 
-- 用 ``` 包的程式碼區塊。
-- 沒用 ``` 包、但整則看起來就是程式碼的訊息：30 分以上、至少 5 行才算（實測一般聊天 0～7 分、英文技術討論最高 20 分、SQL／Python 檔 44～99 分）。短程式碼（約 15 行以下）分數不夠，請用 ``` 包。
-- 行內程式碼（`` `code` ``）只維持等寬，不上色。
+- Code blocks wrapped in ```.
+- Messages not wrapped in ``` that clearly look like code. They need a score of 30 or more and at least 5 lines. In testing, ordinary chat scored 0 to 7, English technical discussion at most 20, and SQL or Python files 44 to 99. Short code of about 15 lines or fewer does not score enough, so wrap it in ```.
+- Inline code (`` `code` ``) stays monospaced but is not colored.
 
-**語言**
+**Languages**
 
-- 第一行只寫語言名（例如 ```` ```java ````、`sql`、`delphi`、`c++`）就照它上色，並隱藏那一行。
-- 沒寫就在 Java、PHP、Python、JavaScript、HTML、CSS、Delphi、SQL、C++ 之間自動偵測，沒把握時不上色。
-- 寫語言名時也可用 highlight.js common 版內建的其他語言（如 `bash`、`json`、`go`、`csharp`）。
+- If the first line holds only a language name, such as ```` ```java ````, `sql`, `delphi` or `c++`, that language is used and the line is hidden.
+- Without a name, it auto-detects among Java, PHP, Python, JavaScript, HTML, CSS, Delphi, SQL and C++. If unsure, it leaves the code uncolored.
+- When you name a language, any other language built into the highlight.js common bundle also works, such as `bash`, `json`, `go` or `csharp`.
 
-**配色**：依訊息文字顏色自動判斷深淺主題。淺色仿 Notepad++ 預設（保留字藍色粗體、字串灰、註解綠、數字橘），深色仿 VS Code Dark+。
+**Colors**: the theme follows the message text color. The light theme mimics the Notepad++ default, with blue bold keywords, gray strings, green comments and orange numbers. The dark theme mimics VS Code Dark+.
 
-## 診斷
+## Diagnostics
 
-- **Alt＋點一下訊息**：把處理結果（找到幾組程式碼、偵測成什麼語言、幾分）與訊息結構（標籤、class、字型、看不見的字元以 `\uXXXX` 標出）印到 Console，並複製到剪貼簿。
-- 出錯或被 Chat 一直重畫時，該則訊息恢復原樣，Console 會印 `[gwt-md]` 開頭的訊息。
+- **Alt+click a message** to print the processing result and the message structure to the Console and copy them to the clipboard. The result shows how many code blocks were found, the detected language and the score. The structure shows tags, classes, fonts, and invisible characters as `\uXXXX`.
+- If something fails or Chat keeps redrawing a message, that message is restored to its original form. The Console prints a message starting with `[gwt-md]`.
 
-## 運作方式
+## How it works
 
-- 每則訊息是 `[role=group][data-id]`；內文、程式碼都不靠 Google 的混淆 class 找：
-  - Markdown 內文：往下找「最深、仍包含全部 markdown 區塊」的元素。
-  - 程式碼區塊：用字型判斷（等寬）。Chat 的程式碼區塊是每行一個等寬 `<div>`，相鄰的併成一塊。
-  - 沒包 ``` 的程式碼：直接含最多換行的元素。
-- 原文只加 `.gwt-md-src` 藏起來（不刪），結果插在後面；訊息被編輯時自動重畫。
-- 複製 Chat 的元素時只帶 `class`、`style` 與連結屬性：連 `jscontroller` 等一起複製的話，Google 的框架會接手重畫、變成無限循環。
-- Chat 強制 Trusted Types，全部用 DOM API 建元素（highlight.js 的輸出也自己轉成 DOM）。
+- Each message is a `[role=group][data-id]` element. Content and code are found without relying on Google's obfuscated class names:
+  - Markdown content: the deepest element that still contains all the markdown blocks.
+  - Code blocks: detected by font, since they are monospaced. Chat renders each code line as a monospaced `<div>`, and adjacent ones are merged into one block.
+  - Code without ```: the element that directly contains the most line breaks.
+- The original is hidden with `.gwt-md-src` but not removed, and the result is inserted after it. Edited messages are redrawn automatically.
+- When copying Chat elements, only `class`, `style` and link attributes are kept. Copying `jscontroller` and similar attributes lets Google's framework take over the redraw and causes an infinite loop.
+- Chat enforces Trusted Types, so all elements are built with DOM APIs. The highlight.js output is also converted to DOM nodes.
 
-## 檔案
+## Files
 
-| 檔案 | 內容 |
+| File | Contents |
 |---|---|
-| `manifest.json` | 擴充功能設定（只注入 `chat.google.com`，含 Gmail 裡的 Chat iframe） |
-| `chat-format.js` | 全部邏輯：markdown 解析與渲染、程式碼偵測與上色、診斷 |
-| `chat-format.css` | 表格、標題、引用、清單、程式碼的樣式與配色 |
-| `vendor/` | highlight.js 11.11.1 與 Delphi 語言檔（BSD-3-Clause，取自 cdnjs，已核對 SRI） |
+| `manifest.json` | Extension settings. Injects only into `chat.google.com`, including the Chat iframe in Gmail |
+| `chat-format.js` | All logic: markdown parsing and rendering, code detection and highlighting, diagnostics |
+| `chat-format.css` | Styles and colors for tables, headings, blockquotes, lists and code |
+| `vendor/` | highlight.js 11.11.1 and the Delphi language file. BSD-3-Clause, from cdnjs, SRI checked |
 | `LICENSE` | MIT License |
 
-## 授權
+## License
 
-MIT License，見 `LICENSE`。`vendor/` 的 highlight.js 是 BSD-3-Clause，授權聲明在檔案開頭。
+MIT License, see `LICENSE`. highlight.js in `vendor/` is BSD-3-Clause, with its notice at the top of each file.
 
-## 沒做的
+## Not supported
 
-- 巢狀清單（縮排）、清單項目跨行、setext 標題（底下一行 `===`）。
+- Nested lists (indentation), list items spanning multiple lines, and setext headings (a `===` line underneath).
